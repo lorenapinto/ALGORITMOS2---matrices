@@ -1,0 +1,119 @@
+
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+#define MAX 20
+
+using namespace std;
+
+void cargarMatriz(int fil, int col,int A[MAX][MAX]);
+void mostrarMatriz(int fil, int col, int A[MAX][MAX]);
+void ordenar(int fil,int col,int A[MAX][MAX]);
+void insercionDirecta(int vec[],int k);
+void vector_a_matriz (int vec[],int k,int fil, int col);
+
+void main ()
+{   
+	int A[MAX][MAX],fil,col;
+	cout<<"Cantidad de filas: ";
+	cin>>fil;
+	cout<<"Cantidad de columnas: ";
+	cin>>col;
+	cargarMatriz(fil,col,A);
+	cout<<endl;
+	mostrarMatriz(fil,col,A);
+	cout<<endl;
+	ordenar(fil,col,A);
+}
+
+void cargarMatriz(int fil, int col,int A[MAX][MAX])
+{
+	int i=0,j=0;
+	while (i<fil)
+	{
+		while (j<col)
+		{
+			cout<<"A["<<i<<"]["<<j<<"]= ";
+			cin>>A[i][j];
+			j++;
+		}
+		i++;
+		j=0;
+	}
+}
+void mostrarMatriz(int fil, int col, int A[MAX][MAX])
+{
+	int i=0,j=0;
+	while (i<fil)
+	{
+		while (j<col)
+		{
+			cout<<A[i][j]<<"\t";
+			j++;
+		}
+		cout<<endl;
+		i++;
+		j=0;
+	}
+}
+
+
+void ordenar(int fil,int col,int A[MAX][MAX])
+{
+	int i=0,j=0,k=0,vec[MAX];
+	while (i<fil)
+	{
+		while (j<col)
+		{
+			vec[k]=A[i][j];
+			j++;
+			k++;
+		}
+		cout<<endl;
+		i++;
+		j=0;
+	}
+	insercionDirecta(vec,k);
+	vector_a_matriz (vec, k,fil,col);
+
+}
+
+void insercionDirecta(int vec[],int k)
+{
+	int i,j,v;
+    for (i = 1; i < k; i++)
+    {
+        v = vec[i];
+        j = i - 1;
+        while (j >= 0 && vec[j] > v)
+        {
+            vec[j + 1] = vec[j];
+            j--;
+        }
+        vec[j + 1] = v;
+    }
+
+}
+
+void vector_a_matriz (int vec[],int k,int fil, int col)
+{
+	int i=0,j=0,h=0, M[MAX][MAX];
+	while (h<k)
+	{
+		while (j<col)
+		{
+			M[i][j]=vec[h];
+			h++;
+			j++;
+		}
+		j=0;
+		i++;
+	}
+	cout<<endl;
+	mostrarMatriz(fil,col,M);
+	getch();
+}
+
+
+
+
